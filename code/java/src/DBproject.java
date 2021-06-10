@@ -176,18 +176,17 @@ public class DBproject{
 	}
 	
 	
-	public int returnSequence (String query) throws SQLException {
+	public int nextSeqVal (String seq) throws SQLException {
 	
 	Statement stmt = this._connection.createStatement ();
 	
-	ResultSet rs = stmt.executeQuery(query);
+	ResultSet rs = stmt.executeQuery(String.format("SELECT nextval('%s')", seq));
 	
 	//System.out.print("Query: " + query);
 	//System.out.println("");
 	
-	if(rs.next())
-	return rs.getInt(1);
-
+	if(rs.next()) return rs.getInt(1);
+	return -1;
 	}
 
 
@@ -315,35 +314,15 @@ public class DBproject{
 
 	public static void AddDoctor(DBproject esql) {//1
 
-		try{
-		String query = "INSERT INTO Doctor(doctor_ID, name, specialty, did) VALUES(0000, ";
-			System.out.print("Doctor name: ");
-			String input = in.readLine();
-			query += "\'" + input + "\' ";
-
-			System.out.print("Specialty: ");
-			String input = in.readLine();
-			query += "\'" + input + "\'";
-
-			System.out.print("Department ID: ");
-			String input = in.readLine();
-			query += input + ");";	
-	}
 }
 	
 
 	public static void AddPatient(DBproject esql) {//2
 	try{
 				
-	  String id = String.valueOf(esql.executeQuery("SELECT nextval('patient_id_seq');"));
-
-	//esql.executeUpdate("CREATE SEQUENCE IF NOT EXISTS patient_id_seq START 250;");
+	  String id = String.valueOf(esql.nextSeqVal("patient_id_seq"));
 		
-
-	System.out.println("NEXT VALUE OF patient_id_seq is: " + id);
-
-	  //String id = String.valueOf(esql.getCurrSeqVal("patient_id_seq"));	  
-			
+	
        	  String query = "INSERT INTO Patient(patient_ID, name, gtype, age, address, number_of_appts) VALUES(";
 		 System.out.print("Patient name: ");
         	 String input = in.readLine();
@@ -373,21 +352,7 @@ public class DBproject{
 	}
 
 	public static void AddAppointment(DBproject esql) {//3
-		try{
-		String query = "INSERT INTO Appointment(appnt_ID, adate, time_slot, status) VALUES(0000, ";
-			System.out.print("Appointment date: ");
-			String input = in.readLine();
-			query += "\'" + input + "\' ";
-
-			System.out.print("Appointment time slot: ");
-			String input = in.readLine();
-			query += "\'" + input "\' ";
-			
-			System.out.print("Appointment status: ");
-			String input = in.readLine();
-			query += input + ");";
-
-		}
+		
 	}
 
 
@@ -397,12 +362,7 @@ public class DBproject{
 
 	public static void ListAppointmentsOfDoctor(DBproject esql) {//5
 		// For a doctor ID and a date range, find the list of active and available appointments of the doctor
-		try{
-		String query = "SELECT D.name, A.status, A.time_slot" +
-			       "FROM Doctor D, Appointment A, has_appointment HA" +
-			       " WHERE D.doctor_ID = HA.doctor_ID AND A.appt_id = HA.appt_id";   
 		}
-	}
 
 	public static void ListAvailableAppointmentsOfDepartment(DBproject esql) {//6
 		// For a department name and a specific date, find the list of available appointments of the department
@@ -410,13 +370,7 @@ public class DBproject{
 
 	public static void ListStatusNumberOfAppointmentsPerDoctor(DBproject esql) {//7
 		// Count number of different types of appointments per doctors and list them in descending order
-		try{
-		String query = "SELECT D.name, COUNT(A.appt_ID) AS AppoinmentCount" +
-			       "FROM Doctor D, Appointment A, has_appointment HA" +
-			       "WHERE D.doctor_ID = HA.doctor_id AND A.appt_id = HA.appt_id" +
-			       "ORDER BY AppointmentCount DESC";
-		}
-
+		
 	}
 
 	
