@@ -314,16 +314,20 @@ public class DBproject{
 	}//end readChoice
 
 	public static void AddDoctor(DBproject esql) {//1
-	
 
-	try {
-	//esql.executeQueryAndReturnResult("SELECT nextval('patient_id_seq');");	
+		try{
+		String query = "INSERT INTO Doctor(doctor_ID, name, specialty, did) VALUES(0000, ";
+			System.out.print("Doctor name: ");
+			String input = in.readLine();
+			query += "\'" + input + "\' ";
 
-	System.out.println(esql.returnSequence("SELECT nextval('patient_id_seq');"));
-		
-	//esql.executeQuery("SELECT 1 FROM Patient");
-	} catch (Exception e) {
-		System.err.println(e.getMessage());
+			System.out.print("Specialty: ");
+			String input = in.readLine();
+			query += "\'" + input + "\'";
+
+			System.out.print("Department ID: ");
+			String input = in.readLine();
+			query += input + ");";	
 	}
 }
 	
@@ -369,6 +373,21 @@ public class DBproject{
 	}
 
 	public static void AddAppointment(DBproject esql) {//3
+		try{
+		String query = "INSERT INTO Appointment(appnt_ID, adate, time_slot, status) VALUES(0000, ";
+			System.out.print("Appointment date: ");
+			String input = in.readLine();
+			query += "\'" + input + "\' ";
+
+			System.out.print("Appointment time slot: ");
+			String input = in.readLine();
+			query += "\'" + input "\' ";
+			
+			System.out.print("Appointment status: ");
+			String input = in.readLine();
+			query += input + ");";
+
+		}
 	}
 
 
@@ -378,6 +397,11 @@ public class DBproject{
 
 	public static void ListAppointmentsOfDoctor(DBproject esql) {//5
 		// For a doctor ID and a date range, find the list of active and available appointments of the doctor
+		try{
+		String query = "SELECT D.name, A.status, A.time_slot" +
+			       "FROM Doctor D, Appointment A, has_appointment HA" +
+			       " WHERE D.doctor_ID = HA.doctor_ID AND A.appt_id = HA.appt_id";   
+		}
 	}
 
 	public static void ListAvailableAppointmentsOfDepartment(DBproject esql) {//6
@@ -386,6 +410,13 @@ public class DBproject{
 
 	public static void ListStatusNumberOfAppointmentsPerDoctor(DBproject esql) {//7
 		// Count number of different types of appointments per doctors and list them in descending order
+		try{
+		String query = "SELECT D.name, COUNT(A.appt_ID) AS AppoinmentCount" +
+			       "FROM Doctor D, Appointment A, has_appointment HA" +
+			       "WHERE D.doctor_ID = HA.doctor_id AND A.appt_id = HA.appt_id" +
+			       "ORDER BY AppointmentCount DESC";
+		}
+
 	}
 
 	
