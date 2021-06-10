@@ -175,6 +175,22 @@ public class DBproject{
 		return rowCount;
 	}
 	
+	
+	public int returnSequence (String query) throws SQLException {
+	
+	Statement stmt = this._connection.createStatement ();
+	
+	ResultSet rs = stmt.executeQuery(query);
+	
+	//System.out.print("Query: " + query);
+	//System.out.println("");
+	
+	if(rs.next())
+	return rs.getInt(1);
+
+	}
+
+
 	/**
 	 * Method to fetch the last value from sequence. This
 	 * method issues the query to the DBMS and returns the current 
@@ -298,6 +314,7 @@ public class DBproject{
 	}//end readChoice
 
 	public static void AddDoctor(DBproject esql) {//1
+
 		try{
 		String query = "INSERT INTO Doctor(doctor_ID, name, specialty, did) VALUES(0000, ";
 			System.out.print("Doctor name: ");
@@ -310,11 +327,49 @@ public class DBproject{
 
 			System.out.print("Department ID: ");
 			String input = in.readLine();
-			query += input + ");";
-		}		
+			query += input + ");";	
 	}
+}
+	
 
 	public static void AddPatient(DBproject esql) {//2
+	try{
+				
+	  String id = String.valueOf(esql.executeQuery("SELECT nextval('patient_id_seq');"));
+
+	//esql.executeUpdate("CREATE SEQUENCE IF NOT EXISTS patient_id_seq START 250;");
+		
+
+	System.out.println("NEXT VALUE OF patient_id_seq is: " + id);
+
+	  //String id = String.valueOf(esql.getCurrSeqVal("patient_id_seq"));	  
+			
+       	  String query = "INSERT INTO Patient(patient_ID, name, gtype, age, address, number_of_appts) VALUES(";
+		 System.out.print("Patient name: ");
+        	 String input = in.readLine();
+        	 query += id + ", \'" + input + "\', ";
+				
+		 System.out.print("Gender: ");
+		 input = in.readLine();
+        	 query += "\'" + input + "\', ";
+				
+		 System.out.print("Age: ");
+        	 input = in.readLine();
+        	 query += input + ", ";
+				
+		 System.out.print("Address: ");
+        	 input = in.readLine();
+        	 query += "\'" + input + "\', ";
+				
+		 System.out.print("Number of Appointments: ");
+        	 input = in.readLine();
+        	 query += input + ");";
+
+         	esql.executeUpdate(query);
+		 
+     	 }catch(Exception e){
+         	System.err.println (e.getMessage());
+  	 }//end Query 2
 	}
 
 	public static void AddAppointment(DBproject esql) {//3
