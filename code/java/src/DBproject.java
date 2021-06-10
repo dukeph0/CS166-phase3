@@ -305,9 +305,14 @@ public class DBproject{
 	public static void AddPatient(DBproject esql) {//2
 	try{
 				
-	  //String id = String.valueOf(esql.executeQuery("SELECT COUNT(*) FROM Patient"));
+	  String id = String.valueOf(esql.executeQuery("SELECT nextval('patient_id_seq');"));
 
-	  String id = String.valueOf(esql.getCurrSeqVal("patient_id_seq"));	  
+	esql.executeUpdate("CREATE SEQUENCE IF NOT EXISTS patient_id_seq START 250;");
+		
+
+	System.out.println("NEXT VALUE OF patient_id_seq is: " + id);
+
+	  //String id = String.valueOf(esql.getCurrSeqVal("patient_id_seq"));	  
 			
        	  String query = "INSERT INTO Patient(patient_ID, name, gtype, age, address, number_of_appts) VALUES(";
 		 System.out.print("Patient name: ");
