@@ -10,6 +10,18 @@ DROP TABLE IF EXISTS searches CASCADE;--OK
 DROP TABLE IF EXISTS schedules CASCADE;--OK
 
 
+
+
+------------
+--Sequence--
+------------
+
+CREATE SEQUENCE patient_id_seq 
+START WITH 250;
+
+
+
+
 -------------
 ---DOMAINS---
 -------------

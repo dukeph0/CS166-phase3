@@ -300,30 +300,34 @@ public class DBproject{
 	public static void AddDoctor(DBproject esql) {//1
 	}
 
+	
+
 	public static void AddPatient(DBproject esql) {//2
 	try{
 				
-	  String id = String.valueOf(esql.executeQuery("SELECT COUNT(*) FROM Patient"));
-				
+	  //String id = String.valueOf(esql.executeQuery("SELECT COUNT(*) FROM Patient"));
+
+	  String id = String.valueOf(esql.getCurrSeqVal("patient_id_seq"));	  
+			
        	  String query = "INSERT INTO Patient(patient_ID, name, gtype, age, address, number_of_appts) VALUES(";
 		 System.out.print("Patient name: ");
         	 String input = in.readLine();
         	 query += id + ", \'" + input + "\', ";
 				
 		 System.out.print("Gender: ");
-        	 String input = in.readLine();
+		 input = in.readLine();
         	 query += "\'" + input + "\', ";
 				
 		 System.out.print("Age: ");
-        	 String input = in.readLine();
+        	 input = in.readLine();
         	 query += input + ", ";
 				
 		 System.out.print("Address: ");
-        	 String input = in.readLine();
+        	 input = in.readLine();
         	 query += "\'" + input + "\', ";
 				
 		 System.out.print("Number of Appointments: ");
-        	 String input = in.readLine();
+        	 input = in.readLine();
         	 query += input + ");";
 
          	esql.executeUpdate(query);
