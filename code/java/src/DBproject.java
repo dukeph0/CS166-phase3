@@ -175,6 +175,22 @@ public class DBproject{
 		return rowCount;
 	}
 	
+	
+	public int returnSequence (String query) throws SQLException {
+	
+	Statement stmt = this._connection.createStatement ();
+	
+	ResultSet rs = stmt.executeQuery(query);
+	
+	//System.out.print("Query: " + query);
+	//System.out.println("");
+	
+	if(rs.next())
+	return rs.getInt(1);
+
+	}
+
+
 	/**
 	 * Method to fetch the last value from sequence. This
 	 * method issues the query to the DBMS and returns the current 
@@ -298,8 +314,18 @@ public class DBproject{
 	}//end readChoice
 
 	public static void AddDoctor(DBproject esql) {//1
-	}
+	
 
+	try {
+	//esql.executeQueryAndReturnResult("SELECT nextval('patient_id_seq');");	
+
+	System.out.println(esql.returnSequence("SELECT nextval('patient_id_seq');"));
+		
+	//esql.executeQuery("SELECT 1 FROM Patient");
+	} catch (Exception e) {
+		System.err.println(e.getMessage());
+	}
+}
 	
 
 	public static void AddPatient(DBproject esql) {//2
@@ -307,7 +333,7 @@ public class DBproject{
 				
 	  String id = String.valueOf(esql.executeQuery("SELECT nextval('patient_id_seq');"));
 
-	esql.executeUpdate("CREATE SEQUENCE IF NOT EXISTS patient_id_seq START 250;");
+	//esql.executeUpdate("CREATE SEQUENCE IF NOT EXISTS patient_id_seq START 250;");
 		
 
 	System.out.println("NEXT VALUE OF patient_id_seq is: " + id);
