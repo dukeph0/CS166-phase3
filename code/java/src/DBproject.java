@@ -322,11 +322,11 @@ public class DBproject{
 		query += ", \'" + input + "\', ";
 
 		System.out.print("Specialty: ");
-		String input = in.readLine();
+		input = in.readLine();
 		query += "\'" + input + "\',";
 
 		System.out.print("Department ID: ");
-		String input = in.readLine();
+		input = in.readLine();
 		query += input + ");";
 
 		esql.executeUpdate(query);
@@ -381,11 +381,11 @@ public class DBproject{
 			query += "\'" + input + "\', ";
 
 			System.out.print("Appointment time slot: ");
-			String input = in.readLine();
+			input = in.readLine();
 			query += "\'" + input + "\', ";
 
 			System.out.print("Appointment status: ");
-			String input = in.readLine();
+			input = in.readLine();
 			query += input + ");";	
 
 			esql.executeUpdate(query);
