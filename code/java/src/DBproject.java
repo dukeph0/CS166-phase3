@@ -404,7 +404,7 @@ public class DBproject{
 		// For a doctor ID and a date range, find the list of active and available appointments of the doctor
 
 		try{
-			String id = String.valueOf(esql.nextSeqVal("List_doctor_appointment_seq"));
+			//String id = String.valueOf(esql.nextSeqVal("List_doctor_appointment_seq"));
 
 			String query = "SELECT D.name, A.status, A.time_slot" +
 			       "FROM Doctor D, Appointment A, has_appointment HA" +
@@ -425,7 +425,7 @@ public class DBproject{
 		// Count number of different types of appointments per doctors and list them in descending order
 		
 		try{
-			String id = String.valueOf(esql.nextSeqVal("List_number_of_appointments_per_doctor_seq"));
+			//String id = String.valueOf(esql.nextSeqVal("List_number_of_appointments_per_doctor_seq"));
 
 			String query = "SELECT D.name, COUNT(A.appt_ID) AS AppoinmentCount" +
 			       "FROM Doctor D, Appointment A, has_appointment HA" +
