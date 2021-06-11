@@ -406,9 +406,11 @@ public class DBproject{
 		try{
 			//String id = String.valueOf(esql.nextSeqVal("List_doctor_appointment_seq"));
 
+			String input = in.readLine();			
+
 			String query = "SELECT D.name, A.status, A.time_slot" +
 			       "FROM Doctor D, Appointment A, has_appointment HA" +
-			       " WHERE D.doctor_ID = HA.doctor_ID AND A.appt_id = HA.appt_id";
+			       " WHERE D.doctor_ID =" + input + "doctor_ID = HA.doctor_ID AND A.appt_id = HA.appt_id";
 
 			esql.executeUpdate(query);
 		
