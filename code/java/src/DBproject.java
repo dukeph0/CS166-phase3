@@ -319,7 +319,7 @@ public class DBproject{
 		String query = "INSERT INTO Doctor(doctor_ID, name, specialty, did) VALUES(";
 		System.out.print("Doctor name: ");
 		String input = in.readLine();
-		query += ", \" + input + ", ";
+		query += ", \'" + input + "\', ";
 
 		System.out.print("Specialty: ");
 		String input = in.readLine();
