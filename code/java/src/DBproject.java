@@ -370,15 +370,16 @@ public class DBproject{
 		System.out.print("Department Name: ");
 		String input = in.readLine();
 		
-                String query =  "SELECT *" +
-                                "FROM has_apppointment H, Doctor D, Department Dep" +
-                                "WHERE Dep.name='"+input+"' AND H.doctor_id=D.doctor_id AND H.appt_id IN (SELECT appt_id)" +
-                                                                                                         "FROM Appointment A" +
-                                                                                                         "WHERE A.adate=";
+                String query =  "SELECT DISTINCT A " +
+                                "FROM has_appointment H, Doctor D, Department Dep, appointment A " +
+                                "WHERE Dep.name='" + input + "' AND H.doctor_id=D.doctor_id AND H.appt_id=A.appnt_id AND A.adate=";
                                 
 		System.out.print("Date: ");
 		input = in.readLine();
-                query += "\'" + in + "\');";
+                query += "\'" + input + "\';";
+
+		System.out.println("Query: " + query);
+
 
 		esql.executeQueryAndPrintResult(query);
 		}catch(Exception e){
