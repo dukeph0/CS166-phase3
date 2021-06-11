@@ -20,7 +20,8 @@ DROP SEQUENCE IF EXISTS patient_id_seq CASCADE; --OK?
 CREATE SEQUENCE patient_id_seq 
 START 250;
 
-
+CREATE SEQUENCE doctor_id_seq
+START 250;
 
 
 -------------

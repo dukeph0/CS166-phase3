@@ -313,8 +313,28 @@ public class DBproject{
 	}//end readChoice
 
 	public static void AddDoctor(DBproject esql) {//1
+		try{	
+		String id = String.valueOf(esql.nextSeqVal("doctor_id_seq"));
 
-}
+		String query = "INSERT INTO Doctor(doctor_ID, name, specialty, did) VALUES(";
+		System.out.print("Doctor name: ");
+		String input = in.readLine();
+		query += ", \'" + input + "\', ";
+
+		System.out.print("Specialty: ");
+		input = in.readLine();
+		query += "\'" + input + "\',";
+
+		System.out.print("Department ID: ");
+		input = in.readLine();
+		query += input + ");";
+
+		esql.executeUpdate(query);
+
+	 }catch(Exception e){
+		System.err.println(e.getMessage());
+	 }
+	}
 	
 
 	public static void AddPatient(DBproject esql) {//2
