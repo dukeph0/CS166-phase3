@@ -407,13 +407,13 @@ public class DBproject{
                  String date2 = in.readLine();
 
 
-			String query = "SELECT D.name, A.status, A.time_slot" +
+			String query = "SELECT A " +
 			               "FROM Appointment A, has_appointment H " +
-			               "WHERE H.doctor_ID=" + doctor + " AND A.appt_id = H.appt_id AND A.adate>" + date1 + " AND A.adate<" + date2 +
-				       " INTERSECT" +
-				       "(SELECT * FROM Appointment WHERE status='AC' UNION SELECT* FROM Appointment WHERE status='AV');";
+			               "WHERE H.doctor_ID=" + doctor + " AND A.appnt_id = H.appt_id AND A.adate between '" + date1 + "' AND '" + date2 + "' "+
+				       "INTERSECT " +
+				       "(SELECT A1 FROM Appointment A1 WHERE A1.status='AC' UNION SELECT A2 FROM Appointment A2 WHERE A2.status='AV');";
 
-			System.out.println(query);
+			System.out.println();
 
 			List<List<String>> result = esql.executeQueryAndReturnResult(query);
 		
@@ -424,6 +424,9 @@ public class DBproject{
 			}
 			System.out.println("");
 		}
+
+		 System.out.println("");
+
 
 		}catch(Exception e){
 			System.err.println(e.getMessage());
