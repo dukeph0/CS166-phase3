@@ -15,13 +15,6 @@ DROP SEQUENCE IF EXISTS doctor_id_seq CASCADE; --OK
 DROP SEQUENCE IF EXISTS appnt_id_seq CASCADE; --OK
 
 
-------------
----Index----
-------------
-
-CREATE INDEX patient_id_index ON patient (patient_id);
-CREATE INDEX appointment_id_index ON appointment (appnt_id);
-CREATE INDEX doctor_index_id ON doctor (doctor_id);
 
 ------------
 --Sequence--
@@ -150,6 +143,15 @@ CREATE TABLE has_appointment
 	FOREIGN KEY (appt_id) REFERENCES Appointment(appnt_ID),
 	FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_ID)
 );
+
+------------
+---Index----
+------------
+
+CREATE INDEX patient_id_index ON patient (patient_id);
+CREATE INDEX appointment_id_index ON appointment (appnt_id);
+CREATE INDEX doctor_index_id ON doctor (doctor_id);
+
 
 ----------------------------
 -- INSERT DATA STATEMENTS --
