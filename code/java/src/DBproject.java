@@ -312,9 +312,29 @@ public class DBproject{
 		return input;
 	}//end readChoice
 
-	public static void AddDoctor(DBproject esql) {//1
+	public static void AddDoctor(DBproject esql) {//1		
+	try{	
+		String id = String.valueOf(esql.nextSeqVal("doctor_id_seq"));			
 
-}
+		String query = "INSERT INTO Doctor(doctor_ID, name, specialty, did) VALUES(";
+		System.out.print("Doctor name: ");
+		String input = in.readLine();
+		query += ", \'" + input + "\', ";
+
+		System.out.print("Specialty: ");
+		input = in.readLine();
+		query += "\'" + input + "\',";
+
+		System.out.print("Department ID: ");
+		input = in.readLine();
+		query += input + ");";
+
+		esql.executeUpdate(query);
+		
+	 }catch(Exception e){
+		System.err.println(e.getMessage());
+	 }
+	}
 	
 
 	public static void AddPatient(DBproject esql) {//2
@@ -352,7 +372,27 @@ public class DBproject{
 	}
 
 	public static void AddAppointment(DBproject esql) {//3
+		try{
+			String id = String.valueOf(esql.nextSeqVal("appnt_id_seq"));
+
+			String query = "INSERT INTO Appointment(appnt_ID, adate, time_slot, status) VALUES(";
+			System.out.print("Appointment date: ");
+			String input = in.readLine();
+			query += "\'" + input + "\', ";
+
+			System.out.print("Appointment time slot: ");
+			input = in.readLine();
+			query += "\'" + input + "\', ";
+
+			System.out.print("Appointment status: ");
+			input = in.readLine();
+			query += input + ");";	
+
+			esql.executeUpdate(query);
 		
+		}catch(Exception e){
+			System.err.println(e.getMessage());
+		}	
 	}
 
 
@@ -431,6 +471,7 @@ public class DBproject{
 		}catch(Exception e){
 			System.err.println(e.getMessage());
 		}
+	}
 
 	}
 
@@ -441,6 +482,19 @@ public class DBproject{
 	public static void ListStatusNumberOfAppointmentsPerDoctor(DBproject esql) {//7
 		// Count number of different types of appointments per doctors and list them in descending order
 		
+		try{
+			//String id = String.valueOf(esql.nextSeqVal("List_number_of_appointments_per_doctor_seq"));
+
+			String query = "SELECT D.name, COUNT(A.appt_ID) AS AppoinmentCount" +
+			       "FROM Doctor D, Appointment A, has_appointment HA" +
+			       "WHERE D.doctor_ID = HA.doctor_id AND A.appt_id = HA.appt_id" +
+			       "ORDER BY AppointmentCount DESC";
+
+			esql.executeUpdate(query);
+		
+		}catch(Exception e){
+			System.err.println(e.getMessage());
+		}
 	}
 
 	
