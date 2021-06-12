@@ -433,15 +433,31 @@ public class DBproject{
 
                  System.out.print("Appointment id: ");
                  String appt = in.readLine();
+
+		 String aExist = "f";
+
+		
+		 Statement stmt = esql._connection.createStatement ();
+		 ResultSet rs = stmt.executeQuery("SELECT EXISTS(SELECT 1 FROM Appointment WHERE appnt_id=" + appt + ");");
+
+                 if(rs.next()) aExist  = rs.getString(1);
+			
+		//System.out.println("aExist= " + aExist);
                  
+		 if(aExist.equals("f")) {
+			//appointment does not exist, so we create new one:
+			System.out.println("Because appointment id not exist, we must create a new one with auto-generated id");
+			AddAppointment(esql);
+		 	
+			appt = String.valueOf(esql.getCurrSeqVal("appnt_id_seq"));
+		 }
+	
 	//Find appt status:
 	
-		 //List<List<String>> result = esql.executeQueryAndReturnResult("SELECT status FROM appointment WHERE appnt_ID=" + appt + ";");
-
-	  	 Statement stmt = esql._connection.createStatement ();
+		 
 		 String status = "err";
 
-  	         ResultSet rs = stmt.executeQuery("SELECT status FROM appointment WHERE appnt_ID=" + appt + ";");
+  	         rs = stmt.executeQuery("SELECT status FROM appointment WHERE appnt_ID=" + appt + ";");
 
                        if(rs.next())  status = rs.getString(1);
                         	
@@ -451,40 +467,39 @@ public class DBproject{
 		
 	//if status is:
 	
-		switch(status) {
-			case "AV":	
-				esql.executeUpdate("UPDATE appointment SET status = 'AC' WHERE appnt_id= " + appt + ";");
-				esql.executeUpdate("UPDATE has_appointment SET doctor_id = " + doctor + " WHERE appnt_id=" + appt + ";");
+		if(status.equals("AV")) {
+			
+				esql.executeUpdate("UPDATE appointment SET status = 'AC' WHERE appnt_ID= " + appt + ";");
+				esql.executeUpdate("UPDATE has_appointment SET doctor_id = " + doctor + " WHERE appt_id=" + appt + ";");
 				esql.executeUpdate("UPDATE patient SET number_of_appts = number_of_appts + 1 WHERE patient_id=" + patient + ";");
 				
-				System.out.println("---------------------------------------------------------");
+				System.out.println("\n---------------------------------------------------------");
 				System.out.println("AV --> AC | Updated tuples in has_appointment and patient");
-				System.out.println("---------------------------------------------------------");
-
-				break;
-			case "AC":
-				esql.executeUpdate("UPDATE appointment SET status = 'WL' WHERE appnt_id=" + appt);
-                                esql.executeUpdate("UPDATE has_appointment SET doctor_id = " + doctor + " WHERE appnt_id=" + appt + ";");
+				System.out.println("---------------------------------------------------------\n");
+		} 
+		else if(status.equals("AC")) {
+				
+				esql.executeUpdate("UPDATE appointment SET status = 'WL' WHERE appnt_ID=" + appt);
+                                esql.executeUpdate("UPDATE has_appointment SET doctor_id = " + doctor + " WHERE appt_id=" + appt + ";");
                                 esql.executeUpdate("UPDATE patient SET number_of_appts = number_of_appts + 1 WHERE patient_id=" + patient + ";");
 				
-				System.out.println("---------------------------------------------------------");
+				System.out.println("\n---------------------------------------------------------");
                                 System.out.println("AC --> WL | Updated tuples in has_appointment and patient");
-                                System.out.println("---------------------------------------------------------");
-
-
-				break;
-			case "WL":
-                                esql.executeUpdate("UPDATE has_appointment SET doctor_id = " + doctor + " WHERE appnt_id=" + appt + ";");
+                                System.out.println("---------------------------------------------------------\n");
+		}
+		else if(status.equals("WL")) {
+                                esql.executeUpdate("UPDATE has_appointment SET doctor_id = " + doctor + " WHERE appt_ID=" + appt + ";");
                                 esql.executeUpdate("UPDATE patient SET number_of_appts = number_of_appts + 1 WHERE patient_id=" + patient + ";");
 
-				System.out.println("---------------------------------------------");
+				System.out.println("\n---------------------------------------------");
                                 System.out.println("Updated tuples in has_appointment and patient");
-                                System.out.println("---------------------------------------------");
+                                System.out.println("---------------------------------------------\n");
 
-
-                                break;
-			default:
-				break;
+		}                             
+		else {
+				System.out.println("\n---------------");
+                                System.out.println("Changed Nothing");
+                                System.out.println("---------------\n");
 		}
 	
 
