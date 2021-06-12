@@ -28,6 +28,7 @@
 * Find total number of patients per doctor with a given status
 
 ## Instructions on using the Hospital Database: 
+
 * Open terminal 
 * Navigate to "code" folder 
 * Navigate to "postgresql" folder
@@ -36,7 +37,7 @@
 * Navigate to "java" folder
 * Run "compile.sh" using command "source ./compile.sh"
 * Run "run.sh" using command "source ./run.sh"
-* Select menu number with inputs 
+* Select menu number asking for inputs 
 * Select 9 from menu to exit
  
 ## Proposed Hospital ERD schema:
@@ -47,5 +48,20 @@
 
 ## Demonstration:
 
+* Add doctor
+
+* Add patient
+
+* Add appointment
+
+* Given a patient, a doctor and an appoinment of the doctor that s/he wants to take, add an appoinment to the DB
+
+* For a doctor ID and a date range, find the list of active and available appointments of the doctor
+
+* For a department name and a specific date, find the list of available appointments of the department
+
+* Count number of different types of appointments per doctor and list them in descending order
+
+* Find how many patients per doctor there are with a given status (i.e. PA, AC, AV, WL) and list that number per doctor.
 
 ## Project Report Summary: 
