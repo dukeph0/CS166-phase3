@@ -19,6 +19,7 @@
 ## Hospital ERD schema proposal:
 
 ## Proposed Hospital ERD schema:
+![alt text](CS166_phase1_class_schema.png)
 
 ## Menu Functions : 
 
