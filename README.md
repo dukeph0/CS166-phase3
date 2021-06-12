@@ -14,7 +14,7 @@
 ## Purpose and Goal: 
 
 * Create a hospital database management system that uses PSQL and Java to track information
-* Information includes: record keeping of doctors and patients, setting up and managing appointments, maintenance of specialized departments.
+* Database must: record keeping of doctors and patients, setting up and managing appointments, maintenance of specialized departments.
  
 ## Hospital ERD schema proposal:
 ![alt text](phase1ERD.png)
