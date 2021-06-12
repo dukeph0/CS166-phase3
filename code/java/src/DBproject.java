@@ -477,6 +477,26 @@ public class DBproject{
 
 	public static void ListAvailableAppointmentsOfDepartment(DBproject esql) {//6
 		// For a department name and a specific date, find the list of available appointments of the department
+		// For a department name and a specific date, find the list of available appointments of the department
+		try{
+		System.out.print("Department Name: ");
+		String input = in.readLine();
+		
+                String query =  "SELECT DISTINCT A " +
+                                "FROM has_appointment H, Doctor D, Department Dep, appointment A " +
+                                "WHERE Dep.name='" + input + "' AND H.doctor_id=D.doctor_id AND H.appt_id=A.appnt_id AND A.adate=";
+                                
+		System.out.print("Date: ");
+		input = in.readLine();
+                query += "\'" + input + "\';";
+
+		System.out.println("Query: " + query);
+
+
+		esql.executeQueryAndPrintResult(query);
+		}catch(Exception e){
+			System.err.println(e.getMessage());
+		}
 	}
 
 	public static void ListStatusNumberOfAppointmentsPerDoctor(DBproject esql) {//7
