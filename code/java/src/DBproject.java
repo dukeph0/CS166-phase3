@@ -429,12 +429,12 @@ public class DBproject{
 		try{
 			//String id = String.valueOf(esql.nextSeqVal("List_number_of_appointments_per_doctor_seq"));
 
-			String query = "SELECT D.name, COUNT(A.appt_ID) AS AppoinmentCount" +
-			       "FROM Doctor D, Appointment A, has_appointment HA" +
-			       "WHERE D.doctor_ID = HA.doctor_id AND A.appt_id = HA.appt_id" +
-			       "ORDER BY AppointmentCount DESC";
+			String query = "SELECT D, COUNT(DISTINCT A.status) " + 
+				       "FROM Doctor D, Appointment A, has_appointment H " +
+				       "WHERE H.appt_id=A.appnt_id AND H.doctor_id=D.doctor_id " +
+				       "GROUP BY D;";
 
-			esql.executeUpdate(query);
+			esql.executeQueryAndPrintResult(query);
 		
 		}catch(Exception e){
 			System.err.println(e.getMessage());
