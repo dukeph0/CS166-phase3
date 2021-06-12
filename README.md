@@ -60,6 +60,8 @@
 * Given a patient, a doctor and an appoinment of the doctor that s/he wants to take, add an appoinment to the DB
 
 ![alt text](/Demo/Demo4.png)
+![alt text](/Demo/Demo4_2.png)
+if appointment 4 does not exist
 * For a doctor ID and a date range, find the list of active and available appointments of the doctor
 
 ![alt text](/Demo/Demo5.png)
