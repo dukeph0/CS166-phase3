@@ -29,18 +29,21 @@
 
 ## Instructions on using the Hospital Database: 
 * Open terminal 
-* Navigate to code folder 
+* Navigate to "code" folder 
 * Navigate to "postgresql" folder
-* Run "startPostgreSQL.sh" by using command "source ./startPostgre.sh"
-
+* Run "startPostgreSQL.sh" using command "source ./startPostgre.sh"
+* Run "createPostgreDB.sh" using command "source ./createPostgreDB.sh"
+* Navigate to "java" folder
+* Run "compile.sh" using command "source ./compile.sh"
+* Run "run.sh" using command "source ./run.sh"
+* Select menu number with inputs 
+* Select 9 from menu to exit
  
 ## Proposed Hospital ERD schema:
 ![alt text](phase1ERD.png)
 
 ## Actual Hospital ERD schema:
 ![alt text](CS166_phase1_class_schema.png)
-
-
 
 ## Demonstration:
 
