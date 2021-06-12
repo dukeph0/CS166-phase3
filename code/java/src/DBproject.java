@@ -336,9 +336,9 @@ public class DBproject{
 
 		esql.executeUpdate(query);
 		
-		System.out.println("---------------------------------------------------------------");
+		System.out.println("\n--------------------------------------------------------");
                 System.out.println("Added Doctor(" + id + ", " + name + ", " + spec + ", " + dep + ")");
-                System.out.println("---------------------------------------------------------------");
+                System.out.println("--------------------------------------------------------\n");
 
 		
 	 }catch(Exception e){
@@ -374,9 +374,9 @@ public class DBproject{
         	 String num = in.readLine();
         	 query += num + ");";
 		
-		System.out.println("---------------------------------------------------------------");
-                System.out.println("Added Patient(" + id + ", " + name + ", " + gen + ", " + age + ", " + add + ", " num + ")");
-                System.out.println("---------------------------------------------------------------");
+		System.out.println("\n----------------------------------------------------------");
+                System.out.println("Added Patient(" + id + ", " + name + ", " + gen + ", " + age + ", " + add + ", " + num + ")");
+                System.out.println("----------------------------------------------------------\n");
 
          	esql.executeUpdate(query);
 		 
@@ -390,10 +390,11 @@ public class DBproject{
 			String id = String.valueOf(esql.nextSeqVal("appnt_id_seq"));
 
 			String query = "INSERT INTO Appointment(appnt_ID, adate, time_slot, status) VALUES(" + id;
-			
+		
+
 			System.out.print("Appointment date: ");
 			String date = in.readLine();
-			query += "\'" + date + "\', ";
+			query += ", \'" + date + "\',  ";
 
 			System.out.print("Appointment time slot: ");
 			String time = in.readLine();
@@ -401,13 +402,15 @@ public class DBproject{
 
 			System.out.print("Appointment status: ");
 			String stat = in.readLine();
-			query += stat + ");";	
+			query += "\'" + stat + "\' );";	
+
+			//System.out.println("Query: " + query);
 
 			esql.executeUpdate(query);
 			
-			System.out.println("---------------------------------------------------------------");
-              		System.out.println("Added Appointment(" + id + ", " + date + ", " + time + ", " + stat + ")");
-                	System.out.println("---------------------------------------------------------------");
+			System.out.println("\n---------------------------------------------------");
+              		System.out.println("Added Appointment(" + id + ", " + date + ", " + time + ", " + stat + ")" );
+                	System.out.println("---------------------------------------------------\n");
 
 		
 		}catch(Exception e){
