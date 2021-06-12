@@ -17,6 +17,7 @@
 * Information includes: record keeping of doctors and patients, setting up and managing appointments, maintenance of specialized departments.
  
 ## Hospital ERD schema proposal:
+![alt text](phase 1_ ER Diagram.png)
 
 ## Proposed Hospital ERD schema:
 ![alt text](CS166_phase1_class_schema.png)
