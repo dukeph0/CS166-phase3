@@ -316,7 +316,10 @@ public class DBproject{
 	try{	
 		String id = String.valueOf(esql.nextSeqVal("doctor_id_seq"));			
 
-		String query = "INSERT INTO Doctor(doctor_ID, name, specialty, did) VALUES(";
+	//	System.out.println("ID: " + id);
+
+
+		String query = "INSERT INTO Doctor(doctor_ID, name, specialty, did) VALUES(" + id;
 		System.out.print("Doctor name: ");
 		String input = in.readLine();
 		query += ", \'" + input + "\', ";
@@ -328,6 +331,8 @@ public class DBproject{
 		System.out.print("Department ID: ");
 		input = in.readLine();
 		query += input + ");";
+
+	//	System.out.println(query);
 
 		esql.executeUpdate(query);
 		
@@ -343,7 +348,7 @@ public class DBproject{
 	  String id = String.valueOf(esql.nextSeqVal("patient_id_seq"));
 		
 	
-       	  String query = "INSERT INTO Patient(patient_ID, name, gtype, age, address, number_of_appts) VALUES(";
+       	  String query = "INSERT INTO Patient(patient_ID, name, gtype, age, address, number_of_appts) VALUES(" + id;
 		 System.out.print("Patient name: ");
         	 String input = in.readLine();
         	 query += id + ", \'" + input + "\', ";
@@ -375,7 +380,7 @@ public class DBproject{
 		try{
 			String id = String.valueOf(esql.nextSeqVal("appnt_id_seq"));
 
-			String query = "INSERT INTO Appointment(appnt_ID, adate, time_slot, status) VALUES(";
+			String query = "INSERT INTO Appointment(appnt_ID, adate, time_slot, status) VALUES(" + id;
 			System.out.print("Appointment date: ");
 			String input = in.readLine();
 			query += "\'" + input + "\', ";
@@ -473,7 +478,6 @@ public class DBproject{
 		}
 	}
 
-	}
 
 	public static void ListAvailableAppointmentsOfDepartment(DBproject esql) {//6
 		// For a department name and a specific date, find the list of available appointments of the department
