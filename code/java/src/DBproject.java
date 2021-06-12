@@ -168,7 +168,7 @@ public class DBproject{
 		int rowCount = 0;
 
 		//iterates through the result set and count nuber of results.
-		if(rs.next()){
+		while(rs.next()){
 			rowCount++;
 		}//end while
 		stmt.close ();
@@ -398,25 +398,81 @@ public class DBproject{
 
 	public static void MakeAppointment(DBproject esql) {//4
 		// Given a patient, a doctor and an appointment of the doctor that s/he wants to take, add an appointment to the DB
+	 try{
+	//get user input:
+                 System.out.print("Patient id: ");
+                 String patient = in.readLine();
+                 
+
+                 System.out.print("Doctor id: ");
+                 String doctor = in.readLine();
+         
+
+                 System.out.print("Appointment id: ");
+                 String appt = in.readLine();
+                 
+	//Find appt status:
+	
+		 List<List<String>> result = esql.executeQueryAndReturnResult("SELECT status FROM appointment WHERE appnt_ID=" + appt + ";");
+	
+		String status = result.get(0).get(1) + result.get(0).get(2);
+
+		System.out.println("Status of appointment " + appt + ": " + status);
+
+
+
+//                esql.executeUpdate(query);
+
+         }catch(Exception e){
+                System.err.println (e.getMessage());
+         }//end Query 4
+
+	
+
+
+
 	}
 
 	public static void ListAppointmentsOfDoctor(DBproject esql) {//5
 		// For a doctor ID and a date range, find the list of active and available appointments of the doctor
 
-		try{
-			//String id = String.valueOf(esql.nextSeqVal("List_doctor_appointment_seq"));
+	try{
 
-			String input = in.readLine();			
+       		 System.out.print("Doctor id: ");
+                 String doctor = in.readLine();
 
-			String query = "SELECT D.name, A.status, A.time_slot" +
-			       "FROM Doctor D, Appointment A, has_appointment HA" +
-			       " WHERE D.doctor_ID =" + input + "doctor_ID = HA.doctor_ID AND A.appt_id = HA.appt_id";
 
-			esql.executeUpdate(query);
+                 System.out.print("Date range (press enter to separate): ");
+                 String date1 = in.readLine();
+                 String date2 = in.readLine();
+
+
+			String query = "SELECT A " +
+			               "FROM Appointment A, has_appointment H " +
+			               "WHERE H.doctor_ID=" + doctor + " AND A.appnt_id = H.appt_id AND A.adate between '" + date1 + "' AND '" + date2 + "' "+
+				       "INTERSECT " +
+				       "(SELECT A1 FROM Appointment A1 WHERE A1.status='AC' UNION SELECT A2 FROM Appointment A2 WHERE A2.status='AV');";
+
+			System.out.println();
+
+			List<List<String>> result = esql.executeQueryAndReturnResult(query);
 		
+		
+		for(int i = 0; i < result.size(); i++) {
+			for(int w = 0; w < result.get(i).size(); w++) {
+				System.out.print(result.get(i).get(w));
+			}
+			System.out.println("");
+		}
+
+		 System.out.println("");
+
+
 		}catch(Exception e){
 			System.err.println(e.getMessage());
 		}
+	}
+
 	}
 
 	public static void ListAvailableAppointmentsOfDepartment(DBproject esql) {//6
