@@ -10,8 +10,18 @@ DROP TABLE IF EXISTS searches CASCADE;--OK
 DROP TABLE IF EXISTS schedules CASCADE;--OK
 
 
-DROP SEQUENCE IF EXISTS patient_id_seq CASCADE; --OK?
+DROP SEQUENCE IF EXISTS patient_id_seq CASCADE; --OK
+DROP SEQUENCE IF EXISTS doctor_id_seq CASCADE; --OK
+DROP SEQUENCE IF EXISTS appnt_id_seq CASCADE; --OK
 
+
+------------
+---Index----
+------------
+
+CREATE INDEX patient_id_index ON patient (patient_id);
+CREATE INDEX appointment_id_index ON appointment (appnt_id);
+CREATE INDEX doctor_index_id ON doctor (doctor_id);
 
 ------------
 --Sequence--
