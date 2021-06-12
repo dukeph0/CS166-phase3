@@ -75,6 +75,11 @@
 
 ## Project Summary
 
+This program allows a user to interact with a postgresSQL java interface using JDBC (Java Database Connector).
+This user is prompted with 8 options that can add data to the databases using **INSERT** commands,
+or reference data in tables using **SELECT** commands. The code allows for user input, which will dynamically
+the queries on runtime execution.
+
 * To test the performance, we used the "\timing" in psql. 
 
 ![alt text](/Demo/performance1.png)
