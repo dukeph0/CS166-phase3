@@ -27,7 +27,8 @@
 * List total number of different types of appointments per doctor in descending order
 * Find total number of patients per doctor with a given status
 
-## Instructions on using the Hospital Database
+## Instructions on using the Hospital Database: 
+
 
  
 ## Hospital ERD schema proposal:
@@ -35,6 +36,7 @@
 
 ## Proposed Hospital ERD schema:
 ![alt text](CS166_phase1_class_schema.png)
+
 
 
 ## Demonstration:
