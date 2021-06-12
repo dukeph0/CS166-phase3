@@ -28,7 +28,10 @@
 * Find total number of patients per doctor with a given status
 
 ## Instructions on using the Hospital Database: 
-
+* Open terminal 
+* Navigate to code folder 
+* Navigate to "postgresql" folder
+* Run "startPostgreSQL.sh" by using command "source ./startPostgre.sh"
 
  
 ## Proposed Hospital ERD schema:
