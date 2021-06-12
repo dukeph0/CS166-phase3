@@ -168,7 +168,7 @@ public class DBproject{
 		int rowCount = 0;
 
 		//iterates through the result set and count nuber of results.
-		if(rs.next()){
+		while(rs.next()){
 			rowCount++;
 		}//end while
 		stmt.close ();
@@ -358,6 +358,39 @@ public class DBproject{
 
 	public static void MakeAppointment(DBproject esql) {//4
 		// Given a patient, a doctor and an appointment of the doctor that s/he wants to take, add an appointment to the DB
+	 try{
+	//get user input:
+                 System.out.print("Patient id: ");
+                 String patient = in.readLine();
+                 
+
+                 System.out.print("Doctor id: ");
+                 String doctor = in.readLine();
+         
+
+                 System.out.print("Appointment id: ");
+                 String appt = in.readLine();
+                 
+	//Find appt status:
+	
+		 List<List<String>> result = esql.executeQueryAndReturnResult("SELECT status FROM appointment WHERE appnt_ID=" + appt + ";");
+	
+		String status = result.get(0).get(1) + result.get(0).get(2);
+
+		System.out.println("Status of appointment " + appt + ": " + status);
+
+
+
+//                esql.executeUpdate(query);
+
+         }catch(Exception e){
+                System.err.println (e.getMessage());
+         }//end Query 4
+
+	
+
+
+
 	}
 
 	public static void ListAppointmentsOfDoctor(DBproject esql) {//5
