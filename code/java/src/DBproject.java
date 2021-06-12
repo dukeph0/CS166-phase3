@@ -373,13 +373,43 @@ public class DBproject{
                  
 	//Find appt status:
 	
-		 List<List<String>> result = esql.executeQueryAndReturnResult("SELECT status FROM appointment WHERE appnt_ID=" + appt + ";");
-	
-		String status = result.get(0).get(1) + result.get(0).get(2);
+		 //List<List<String>> result = esql.executeQueryAndReturnResult("SELECT status FROM appointment WHERE appnt_ID=" + appt + ";");
+
+	  	 Statement stmt = esql._connection.createStatement ();
+		 String status = "err";
+
+  	         ResultSet rs = stmt.executeQuery("SELECT status FROM appointment WHERE appnt_ID=" + appt + ";");
+
+                       if(rs.next())  status = rs.getString(1);
+                        	
 
 		System.out.println("Status of appointment " + appt + ": " + status);
 
+		
+	//if status is:
+	
+		switch(status) {
+			case AV:	
+				esql.executeUpdate("UPDATE appointment SET status = 'AC' WHERE appnt_id= " + appt + ";");
+				esql.executeUpdate("UPDATE has_appointment SET doctor_id = " + doctor + " WHERE appnt_id=" + appt + ";");
+				esql.executeUpdate("UPDATE patient SET number_of_appts = number_of_appts + 1 WHERE patient_id=" + patient + ";");
 
+				break;
+			case AC:
+				esql.executeUpdate("UPDATE appointment SET status = 'WL' WHERE appnt_id=" + appt);
+                                esql.executeUpdate("UPDATE has_appointment SET doctor_id = " + doctor + " WHERE appnt_id=" + appt + ";");
+                                esql.executeUpdate("UPDATE patient SET number_of_appts = number_of_appts + 1 WHERE patient_id=" + patient + ";");
+
+				break;
+			case WL:
+                                esql.executeUpdate("UPDATE has_appointment SET doctor_id = " + doctor + " WHERE appnt_id=" + appt + ";");
+                                esql.executeUpdate("UPDATE patient SET number_of_appts = number_of_appts + 1 WHERE patient_id=" + patient + ";");
+
+                                break;
+			default:
+				break;
+		}
+	
 
 //                esql.executeUpdate(query);
 
