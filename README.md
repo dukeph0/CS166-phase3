@@ -72,3 +72,13 @@
 * Find how many patients per doctor there are with a given status (i.e. PA, AC, AV, WL) and list that number per doctor.
 
 ![alt text](/Demo/Demo8.png)
+
+## Project Summary
+
+* To test the performance, we used the "\timing" in psql. 
+
+![alt text](/Demo/performance1.png)
+
+![alt text](/Demo/performance2.png)
+
+* Note: number 7 isn't using constant so indexing is slower
