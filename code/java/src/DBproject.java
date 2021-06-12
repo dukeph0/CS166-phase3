@@ -389,21 +389,35 @@ public class DBproject{
 	//if status is:
 	
 		switch(status) {
-			case AV:	
+			case "AV":	
 				esql.executeUpdate("UPDATE appointment SET status = 'AC' WHERE appnt_id= " + appt + ";");
 				esql.executeUpdate("UPDATE has_appointment SET doctor_id = " + doctor + " WHERE appnt_id=" + appt + ";");
 				esql.executeUpdate("UPDATE patient SET number_of_appts = number_of_appts + 1 WHERE patient_id=" + patient + ";");
+				
+				System.out.println("---------------------------------------------------------");
+				System.out.println("AV --> AC | Updated tuples in has_appointment and patient");
+				System.out.println("---------------------------------------------------------");
 
 				break;
-			case AC:
+			case "AC":
 				esql.executeUpdate("UPDATE appointment SET status = 'WL' WHERE appnt_id=" + appt);
                                 esql.executeUpdate("UPDATE has_appointment SET doctor_id = " + doctor + " WHERE appnt_id=" + appt + ";");
                                 esql.executeUpdate("UPDATE patient SET number_of_appts = number_of_appts + 1 WHERE patient_id=" + patient + ";");
+				
+				System.out.println("---------------------------------------------------------");
+                                System.out.println("AC --> WL | Updated tuples in has_appointment and patient");
+                                System.out.println("---------------------------------------------------------");
+
 
 				break;
-			case WL:
+			case "WL":
                                 esql.executeUpdate("UPDATE has_appointment SET doctor_id = " + doctor + " WHERE appnt_id=" + appt + ";");
                                 esql.executeUpdate("UPDATE patient SET number_of_appts = number_of_appts + 1 WHERE patient_id=" + patient + ";");
+
+				System.out.println("---------------------------------------------");
+                                System.out.println("Updated tuples in has_appointment and patient");
+                                System.out.println("---------------------------------------------");
+
 
                                 break;
 			default:
