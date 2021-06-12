@@ -321,20 +321,25 @@ public class DBproject{
 
 		String query = "INSERT INTO Doctor(doctor_ID, name, specialty, did) VALUES(" + id;
 		System.out.print("Doctor name: ");
-		String input = in.readLine();
-		query += ", \'" + input + "\', ";
+		String name = in.readLine();
+		query += ", \'" + name + "\', ";
 
 		System.out.print("Specialty: ");
-		input = in.readLine();
-		query += "\'" + input + "\',";
+		String spec = in.readLine();
+		query += "\'" + spec + "\',";
 
 		System.out.print("Department ID: ");
-		input = in.readLine();
-		query += input + ");";
+		String dep = in.readLine();
+		query += dep + ");";
 
 	//	System.out.println(query);
 
 		esql.executeUpdate(query);
+		
+		System.out.println("---------------------------------------------------------------");
+                System.out.println("Added Doctor(" + id + ", " + name + ", " + spec + ", " + dep + ")");
+                System.out.println("---------------------------------------------------------------");
+
 		
 	 }catch(Exception e){
 		System.err.println(e.getMessage());
@@ -350,24 +355,28 @@ public class DBproject{
 	
        	  String query = "INSERT INTO Patient(patient_ID, name, gtype, age, address, number_of_appts) VALUES(" + id;
 		 System.out.print("Patient name: ");
-        	 String input = in.readLine();
-        	 query += id + ", \'" + input + "\', ";
+        	 String name = in.readLine();
+        	 query +=  ", \'" + name + "\', ";
 				
 		 System.out.print("Gender: ");
-		 input = in.readLine();
-        	 query += "\'" + input + "\', ";
+		 String gen = in.readLine();
+        	 query += "\'" + gen + "\', ";
 				
 		 System.out.print("Age: ");
-        	 input = in.readLine();
-        	 query += input + ", ";
+        	 String age = in.readLine();
+        	 query += age + ", ";
 				
 		 System.out.print("Address: ");
-        	 input = in.readLine();
-        	 query += "\'" + input + "\', ";
+        	 String add = in.readLine();
+        	 query += "\'" + add + "\', ";
 				
 		 System.out.print("Number of Appointments: ");
-        	 input = in.readLine();
-        	 query += input + ");";
+        	 String num = in.readLine();
+        	 query += num + ");";
+		
+		System.out.println("---------------------------------------------------------------");
+                System.out.println("Added Patient(" + id + ", " + name + ", " + gen + ", " + age + ", " + add + ", " num + ")");
+                System.out.println("---------------------------------------------------------------");
 
          	esql.executeUpdate(query);
 		 
@@ -381,23 +390,29 @@ public class DBproject{
 			String id = String.valueOf(esql.nextSeqVal("appnt_id_seq"));
 
 			String query = "INSERT INTO Appointment(appnt_ID, adate, time_slot, status) VALUES(" + id;
+			
 			System.out.print("Appointment date: ");
-			String input = in.readLine();
-			query += "\'" + input + "\', ";
+			String date = in.readLine();
+			query += "\'" + date + "\', ";
 
 			System.out.print("Appointment time slot: ");
-			input = in.readLine();
-			query += "\'" + input + "\', ";
+			String time = in.readLine();
+			query += "\'" + time + "\', ";
 
 			System.out.print("Appointment status: ");
-			input = in.readLine();
-			query += input + ");";	
+			String stat = in.readLine();
+			query += stat + ");";	
 
 			esql.executeUpdate(query);
+			
+			System.out.println("---------------------------------------------------------------");
+              		System.out.println("Added Appointment(" + id + ", " + date + ", " + time + ", " + stat + ")");
+                	System.out.println("---------------------------------------------------------------");
+
 		
 		}catch(Exception e){
 			System.err.println(e.getMessage());
-		}	
+		} //end Query 3	
 	}
 
 
