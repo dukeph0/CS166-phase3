@@ -63,5 +63,6 @@
 * Count number of different types of appointments per doctor and list them in descending order
 
 * Find how many patients per doctor there are with a given status (i.e. PA, AC, AV, WL) and list that number per doctor.
+![alt text](/Demo/Demo8.png)
 
 ## Project Report Summary: 
